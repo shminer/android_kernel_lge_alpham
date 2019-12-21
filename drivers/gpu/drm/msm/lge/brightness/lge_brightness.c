@@ -22,6 +22,10 @@
 #if IS_ENABLED(CONFIG_LGE_COVER_DISPLAY)
 #include "../cover/lge_backlight_cover.h"
 
+#ifdef CONFIG_DRM_SDE_EXPO
+#include "sde_expo_dim_layer.h"
+#endif
+
 extern bool is_dd_connected(void);
 extern bool is_dd_button_enabled(void);
 extern int lge_backlight_device_update_status(struct backlight_device *bd);
@@ -273,6 +277,10 @@ int lge_backlight_device_update_status(struct backlight_device *bd)
 		if (!bl_lvl && brightness)
 			bl_lvl = 1;
 	}
+
+#ifdef CONFIG_DRM_SDE_EXPO
+	bl_lvl = expo_calc_backlight(bl_lvl);
+#endif
 
 	mutex_lock(&display->display_lock);
 	if (panel->lge.lp_state == LGE_PANEL_NOLP && panel->lge.allow_bl_update) {
