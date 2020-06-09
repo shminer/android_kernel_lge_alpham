@@ -1,0 +1,6 @@
+[submodule "techpack"]
+	path = techpack
+	url = git@github.com:shminer/qcom_audio-kernel.git
+[submodule "techpack/audio"]
+	path = techpack/audio
+	url = git@github.com:shminer/qcom_audio-kernel.git
