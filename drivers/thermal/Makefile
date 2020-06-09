@@ -2,6 +2,7 @@
 #
 # Makefile for sensor chip drivers.
 #
+ccflags-y := -Wno-unused-function
 
 obj-$(CONFIG_THERMAL)		+= thermal_sys.o
 thermal_sys-y			+= thermal_core.o thermal_sysfs.o \
