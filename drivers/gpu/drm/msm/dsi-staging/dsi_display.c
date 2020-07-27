@@ -97,6 +97,12 @@ extern int dsi_display_set_backlight_cover(struct dsi_display *dsi_display, u32 
 
 #endif
 
+/* Dim layer add-on */
+struct dsi_display *dsi_display_get_main_display(void)
+{
+	return primary_display;
+}
+
 static void dsi_display_mask_ctrl_error_interrupts(struct dsi_display *display,
 			u32 mask, bool enable)
 {
@@ -5488,7 +5494,10 @@ int dsi_display_dev_probe(struct platform_device *pdev)
 	boot_disp->disp = display;
 #if IS_ENABLED(CONFIG_LGE_DISPLAY_COMMON)
 	if (index == DSI_PRIMARY)
+	{
 		primary_display = display;
+		pr_info("%s: Panel Name = %s\n", __func__, display->name);
+	}
 #endif
 
 	display->disp_node = disp_node;
