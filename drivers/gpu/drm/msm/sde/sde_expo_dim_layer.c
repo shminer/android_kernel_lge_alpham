@@ -15,9 +15,16 @@
  *
  */
 
+#include <linux/moduleparam.h>
+
 #include "dsi_display.h"
 #include "sde_crtc.h"
 #include "sde_expo_dim_layer.h"
+
+#define BL_DC_THRESHOLD 1023
+
+static int dc_threshold = BL_DC_THRESHOLD;
+module_param(dc_threshold, int, 0644);
 
 static int interpolate(int x, int xa, int xb, int ya, int yb)
 {
@@ -87,8 +94,8 @@ u32 expo_calc_backlight(u32 bl_lvl)
 {
 	u32 override_level;
 
-	if (bl_lvl && bl_lvl < BL_DC_THRESHOLD) {
-		override_level = BL_DC_THRESHOLD;
+	if (bl_lvl && bl_lvl < dc_threshold) {
+		override_level = dc_threshold;
 	} else {
 		override_level = bl_lvl;
 	}
