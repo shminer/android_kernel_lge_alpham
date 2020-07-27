@@ -83,6 +83,11 @@ static const struct of_device_id dsi_display_dt_match[] = {
 
 #if IS_ENABLED(CONFIG_LGE_DISPLAY_COMMON)
 static struct dsi_display *primary_display;
+/* Dim layer add-on */
+struct dsi_display *dsi_display_get_main_display(void)
+{
+	return primary_display;
+}
 
 extern int lge_dsi_panel_drv_post_init(struct dsi_panel *panel);
 extern struct lge_blmap* lge_get_blmap(struct dsi_panel *panel, enum lge_blmap_type type);
@@ -96,12 +101,6 @@ extern int dsi_display_set_backlight_cover(struct dsi_display *dsi_display, u32 
 #endif /* CONFIG_LGE_COVER_DISPLAY */
 
 #endif
-
-/* Dim layer add-on */
-struct dsi_display *dsi_display_get_main_display(void)
-{
-	return primary_display;
-}
 
 static void dsi_display_mask_ctrl_error_interrupts(struct dsi_display *display,
 			u32 mask, bool enable)
