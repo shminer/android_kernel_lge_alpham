@@ -21,7 +21,7 @@
 #include "sde_crtc.h"
 #include "sde_expo_dim_layer.h"
 
-#define BL_DC_THRESHOLD 1023
+#define BL_DC_THRESHOLD 247
 
 static int dc_threshold = BL_DC_THRESHOLD;
 module_param(dc_threshold, int, 0644);
@@ -61,6 +61,8 @@ static int brightness_to_alpha(u32 brightness)
 			brightness_alpha_lut[index - 1][ALPHA],
 			brightness_alpha_lut[index][ALPHA]);
 
+    pr_info("Exposure: BR:[%d], ALPHA:[%d] index:[%d]\n",
+			brightness_alpha_lut[index - 1][BRIGHTNESS], brightness_alpha_lut[index][BRIGHTNESS], index);
 	return alpha;
 }
 
@@ -101,6 +103,6 @@ u32 expo_calc_backlight(u32 bl_lvl)
 	}
 
 	expo_crtc_set_dim_layer(bl_lvl);
-
+    pr_info("Exposure: set bl level is %d \n", bl_lvl);
 	return override_level;
 }
