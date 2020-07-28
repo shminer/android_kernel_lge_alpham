@@ -21,7 +21,7 @@
 #include "sde_crtc.h"
 #include "sde_expo_dim_layer.h"
 
-#define BL_DC_THRESHOLD 247
+#define BL_DC_THRESHOLD 255
 
 static int dc_threshold = BL_DC_THRESHOLD;
 module_param(dc_threshold, int, 0644);
