@@ -62,7 +62,7 @@ static int brightness_to_alpha(u32 brightness)
 			brightness_alpha_lut[index][ALPHA]);
 
     pr_info("Exposure: BR:[%d], ALPHA:[%d] index:[%d]\n",
-			brightness_alpha_lut[index - 1][BRIGHTNESS], brightness_alpha_lut[index][BRIGHTNESS], index);
+			brightness_alpha_lut[index - 1][BRIGHTNESS], brightness_alpha_lut[index][ALPHA], index);
 	return alpha;
 }
 
